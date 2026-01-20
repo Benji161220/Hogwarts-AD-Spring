@@ -26,4 +26,7 @@ public class Estudiante {
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+
+    @OneToOne(mappedBy = "estudiante")
+    private Mascota mascota;
 }

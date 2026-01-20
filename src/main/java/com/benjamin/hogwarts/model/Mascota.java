@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,8 @@ public class Mascota {
 
     private String especie;
 
-    @Column(name = "id_estudiante")
-    private int idEstudiante;
+    @OneToOne
+    @JoinColumn(name = "id_estudiante")
+    @JsonBackReference
+    private Estudiante estudiante;
 }
