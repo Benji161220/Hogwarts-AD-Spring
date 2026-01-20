@@ -1,5 +1,7 @@
 package com.benjamin.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,10 +19,15 @@ public class Profesor {
     private String nombre;
 
     private String apellido;
-
-    @Column(name = "id_asignatura")
-    private Integer idAsignatura;
+    @OneToOne
+    @JoinColumn(name = "id_asignatura")
+    @JsonBackReference
+    private Asignatura asignatura;
 
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
+
+    @OneToOne(mappedBy = "jefe")
+    @JsonManagedReference
+    private Casa casa;
 }

@@ -1,9 +1,12 @@
 package com.benjamin.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,8 +21,9 @@ public class Estudiante {
 
     private String apellido;
 
-    @Column(name = "id_casa")
-    private Integer idCasa;
+    @ManyToOne
+    @JoinColumn(name = "id_casa")
+    private Casa casa;
 
     @Column(name = "anyo_curso")
     private int anyoCurso;
@@ -28,5 +32,10 @@ public class Estudiante {
     private LocalDate fechaNacimiento;
 
     @OneToOne(mappedBy = "estudiante")
+    @JsonManagedReference
     private Mascota mascota;
+
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "estudiante-asignaturas")
+    private List<EstudianteAsignatura> asignaturas = new ArrayList<>();
 }
