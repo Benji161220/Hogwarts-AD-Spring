@@ -23,7 +23,7 @@ public class Casa {
 
     @OneToOne
     @JoinColumn(name = "id_jefe")
-    @JsonBackReference
+    @JsonManagedReference
     private Profesor jefe;
 
     private String fantasma;

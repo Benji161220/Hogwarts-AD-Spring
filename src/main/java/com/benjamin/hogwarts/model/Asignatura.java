@@ -29,6 +29,6 @@ public class Asignatura {
     private List<EstudianteAsignatura> estudiantesAsignaturas = new ArrayList<>();
 
     @OneToOne(mappedBy = "asignatura")
-    @JsonManagedReference
+    @JsonBackReference
     private Profesor profesor;
 }

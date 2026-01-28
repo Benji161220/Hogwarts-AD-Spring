@@ -21,13 +21,13 @@ public class Profesor {
     private String apellido;
     @OneToOne
     @JoinColumn(name = "id_asignatura")
-    @JsonBackReference
+    @JsonManagedReference
     private Asignatura asignatura;
 
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
     @OneToOne(mappedBy = "jefe")
-    @JsonManagedReference
+    @JsonBackReference
     private Casa casa;
 }

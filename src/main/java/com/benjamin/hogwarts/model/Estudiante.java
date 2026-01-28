@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Estudiante {
     private String apellido;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "id_casa")
     private Casa casa;
 
