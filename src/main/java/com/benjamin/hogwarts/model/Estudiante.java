@@ -40,4 +40,7 @@ public class Estudiante {
     @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "estudiante-asignaturas")
     private List<EstudianteAsignatura> asignaturas = new ArrayList<>();
+    public String getNombreCompleto(){
+        return nombre + " " + apellido;
+    }
 }

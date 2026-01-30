@@ -30,4 +30,7 @@ public class Profesor {
     @OneToOne(mappedBy = "jefe")
     @JsonBackReference
     private Casa casa;
+    public String getNombreCompleto(){
+        return nombre + " " + apellido;
+    }
 }
