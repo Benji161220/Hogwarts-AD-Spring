@@ -1,5 +1,7 @@
 package com.benjamin.hogwarts.service.impl;
 
+import com.benjamin.hogwarts.dtos.response.CasaDTO;
+import com.benjamin.hogwarts.mappers.CasaMapper;
 import com.benjamin.hogwarts.model.Casa;
 import com.benjamin.hogwarts.respository.CasaRepository;
 import com.benjamin.hogwarts.service.CasaService;
@@ -11,19 +13,24 @@ import java.util.List;
 @Service
 public class CasaServiceImpl implements CasaService {
     private final CasaRepository casaRepository;
+    private final CasaMapper casaMapper;
 
     @Autowired
-    public CasaServiceImpl(CasaRepository casaRepository) {
+    public CasaServiceImpl(CasaRepository casaRepository, CasaMapper casaMapper) {
         this.casaRepository = casaRepository;
+        this.casaMapper = casaMapper;
     }
 
     @Override
-    public List<Casa> obtenerTodasCasas() {
-        return casaRepository.findAll();
+    public List<CasaDTO> obtenerTodasCasas() {
+        return casaRepository.findAll().
+                stream().
+                map(casaMapper::toDTO).
+                toList();
     }
 
     @Override
-    public Casa obtenerCasaPorId(Long id) {
-        return casaRepository.findById(id).orElse(null);
+    public CasaDTO obtenerCasaPorId(Long id) {
+        return casaRepository.findById(id).map(casaMapper::toDTO).orElse(null);
     }
 }

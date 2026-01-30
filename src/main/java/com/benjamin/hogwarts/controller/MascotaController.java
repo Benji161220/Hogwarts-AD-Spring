@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.controller;
 
+import com.benjamin.hogwarts.dtos.response.MascotaDTO;
 import com.benjamin.hogwarts.model.Mascota;
 import com.benjamin.hogwarts.service.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class MascotaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Mascota>> obtenerTodas() {
-        List<Mascota> lista = mascotaService.obtenerTodasMascotas();
+    public ResponseEntity<List<MascotaDTO>> obtenerTodas() {
+        List<MascotaDTO> lista = mascotaService.obtenerTodasMascotas();
         if (lista.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -31,8 +32,8 @@ public class MascotaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mascota> obtenerPorId(@PathVariable Long id) {
-        Mascota mascota = mascotaService.obtenerMascotaPorId(id);
+    public ResponseEntity<MascotaDTO> obtenerPorId(@PathVariable Long id) {
+        MascotaDTO mascota = mascotaService.obtenerMascotaPorId(id);
         if (mascota == null) {
             return ResponseEntity.notFound().build();
         }

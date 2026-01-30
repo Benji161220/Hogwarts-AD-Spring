@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.controller;
 
+import com.benjamin.hogwarts.dtos.response.ProfesorDTO;
 import com.benjamin.hogwarts.model.Profesor;
 import com.benjamin.hogwarts.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class ProfesorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Profesor>> obtenerTodas() {
-        List<Profesor> lista = profesorService.obtenerTodosLosProfesores();
+    public ResponseEntity<List<ProfesorDTO>> obtenerTodas() {
+        List<ProfesorDTO> lista = profesorService.obtenerTodosLosProfesores();
         if (lista.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -31,8 +32,8 @@ public class ProfesorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Profesor> obtenerPorId(@PathVariable Long id) {
-        Profesor profesor = profesorService.obtenerProfesorPorId(id);
+    public ResponseEntity<ProfesorDTO> obtenerPorId(@PathVariable Long id) {
+        ProfesorDTO profesor = profesorService.obtenerProfesorPorId(id);
         if (profesor == null) {
             return ResponseEntity.notFound().build();
         }

@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.controller;
 
+import com.benjamin.hogwarts.dtos.response.AsignaturaDTO;
 import com.benjamin.hogwarts.model.Asignatura;
 import com.benjamin.hogwarts.model.Estudiante;
 import com.benjamin.hogwarts.respository.AsignaturaRepository;
@@ -24,8 +25,8 @@ public class AsignaturaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Asignatura>> obtenerTodas() {
-        List<Asignatura> asignaturas = asignaturaService.obtenerTodasAsignaturas();
+    public ResponseEntity<List<AsignaturaDTO>> obtenerTodas() {
+        List<AsignaturaDTO> asignaturas = asignaturaService.obtenerTodasAsignaturas();
         if (asignaturas.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -33,8 +34,8 @@ public class AsignaturaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Asignatura> obtenerPorId(@PathVariable Long id) {
-        Asignatura asignatura = asignaturaService.obtenerAsignaturaPorId(id);
+    public ResponseEntity<AsignaturaDTO> obtenerPorId(@PathVariable Long id) {
+        AsignaturaDTO asignatura = asignaturaService.obtenerAsignaturaPorId(id);
         if (asignatura == null) {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }

@@ -1,5 +1,6 @@
 package com.benjamin.hogwarts.controller;
 
+import com.benjamin.hogwarts.dtos.response.CasaDTO;
 import com.benjamin.hogwarts.model.Casa;
 import com.benjamin.hogwarts.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class CasaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Casa>> obtenerTodas() {
-        List<Casa> lista = casaService.obtenerTodasCasas();
+    public ResponseEntity<List<CasaDTO>> obtenerTodas() {
+        List<CasaDTO> lista = casaService.obtenerTodasCasas();
         if (lista.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -31,8 +32,8 @@ public class CasaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Casa> obtenerPorId(@PathVariable Long id) {
-        Casa casa = casaService.obtenerCasaPorId(id);
+    public ResponseEntity<CasaDTO> obtenerPorId(@PathVariable Long id) {
+        CasaDTO casa = casaService.obtenerCasaPorId(id);
         if (casa == null) {
             return ResponseEntity.notFound().build();
         }

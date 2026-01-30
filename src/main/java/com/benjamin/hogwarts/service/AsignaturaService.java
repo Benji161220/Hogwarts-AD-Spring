@@ -1,13 +1,13 @@
 package com.benjamin.hogwarts.service;
 
-import com.benjamin.hogwarts.model.Asignatura;
+import com.benjamin.hogwarts.dtos.response.AsignaturaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface AsignaturaService {
-    List<Asignatura> obtenerTodasAsignaturas();
+    List<AsignaturaDTO> obtenerTodasAsignaturas();
 
-    Asignatura obtenerAsignaturaPorId(Long id);
+    AsignaturaDTO obtenerAsignaturaPorId(Long id);
 }

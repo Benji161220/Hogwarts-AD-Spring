@@ -1,6 +1,7 @@
 package com.benjamin.hogwarts.service.impl;
 
-import com.benjamin.hogwarts.model.Profesor;
+import com.benjamin.hogwarts.dtos.response.ProfesorDTO;
+import com.benjamin.hogwarts.mappers.ProfesorMapper;
 import com.benjamin.hogwarts.respository.ProfesorSpring;
 import com.benjamin.hogwarts.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +12,24 @@ import java.util.List;
 @Service
 public class ProfesorServiceImpl implements ProfesorService {
     private final ProfesorSpring profesorRepository;
+    private final ProfesorMapper profesorMapper;
 
     @Autowired
-    public ProfesorServiceImpl(ProfesorSpring profesorRepository) {
+    public ProfesorServiceImpl(ProfesorSpring profesorRepository, ProfesorMapper profesorMapper) {
         this.profesorRepository = profesorRepository;
+        this.profesorMapper = profesorMapper;
     }
 
     @Override
-    public List<Profesor> obtenerTodosLosProfesores() {
-        return profesorRepository.findAll();
+    public List<ProfesorDTO> obtenerTodosLosProfesores() {
+        return profesorRepository.findAll()
+                .stream()
+                .map(profesorMapper::toDTO)
+                .toList();
     }
 
     @Override
-    public Profesor obtenerProfesorPorId(Long id) {
-        return profesorRepository.findById(id).orElse(null);
+    public ProfesorDTO obtenerProfesorPorId(Long id) {
+        return profesorRepository.findById(id).map(profesorMapper::toDTO).orElse(null);
     }
 }

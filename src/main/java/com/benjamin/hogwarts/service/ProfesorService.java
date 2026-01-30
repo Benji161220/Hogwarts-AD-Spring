@@ -1,13 +1,13 @@
 package com.benjamin.hogwarts.service;
 
-import com.benjamin.hogwarts.model.Profesor;
+import com.benjamin.hogwarts.dtos.response.ProfesorDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface ProfesorService {
-    List<Profesor> obtenerTodosLosProfesores();
+    List<ProfesorDTO> obtenerTodosLosProfesores();
 
-    Profesor obtenerProfesorPorId(Long id);
+    ProfesorDTO obtenerProfesorPorId(Long id);
 }

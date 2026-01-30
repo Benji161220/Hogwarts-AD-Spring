@@ -1,13 +1,13 @@
 package com.benjamin.hogwarts.service;
 
-import com.benjamin.hogwarts.model.Casa;
+import com.benjamin.hogwarts.dtos.response.CasaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface CasaService {
-    List<Casa> obtenerTodasCasas();
+    List<CasaDTO> obtenerTodasCasas();
 
-    Casa obtenerCasaPorId(Long id);
+    CasaDTO obtenerCasaPorId(Long id);
 }

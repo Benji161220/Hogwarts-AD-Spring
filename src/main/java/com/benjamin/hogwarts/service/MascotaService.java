@@ -1,13 +1,13 @@
 package com.benjamin.hogwarts.service;
 
-import com.benjamin.hogwarts.model.Mascota;
+import com.benjamin.hogwarts.dtos.response.MascotaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface MascotaService {
-    List<Mascota> obtenerTodasMascotas();
+    List<MascotaDTO> obtenerTodasMascotas();
 
-    Mascota obtenerMascotaPorId(Long id);
+    MascotaDTO obtenerMascotaPorId(Long id);
 }
