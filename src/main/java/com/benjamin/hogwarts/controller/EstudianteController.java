@@ -1,14 +1,13 @@
 package com.benjamin.hogwarts.controller;
 
+import com.benjamin.hogwarts.dtos.request.create.EstudianteCreateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
 import com.benjamin.hogwarts.service.EstudianteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +35,9 @@ public class EstudianteController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
         return ResponseEntity.ok(estudiante); // 200 OK
+    }
+    @PostMapping("/{id}")
+    public ResponseEntity<EstudianteDTO> crearEstudiante(@Valid @RequestBody EstudianteCreateDTO dto){
+        EstudianteDTO estudianteCreado = estudianteService.crea
     }
 }
