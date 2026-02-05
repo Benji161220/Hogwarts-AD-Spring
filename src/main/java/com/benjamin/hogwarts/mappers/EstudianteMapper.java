@@ -46,7 +46,7 @@ public class EstudianteMapper {
         estudiante.setMascota(mascotaMapper.toEntity(dto.getMascota()));
         return estudiante;
     }
-    public void updateEntity(EstudianteUpdateDTO dto, Estudiante estudiante){
+    public void updateEntityFromDto(EstudianteUpdateDTO dto, Estudiante estudiante){
         if (dto == null || estudiante == null){
             return;
         }

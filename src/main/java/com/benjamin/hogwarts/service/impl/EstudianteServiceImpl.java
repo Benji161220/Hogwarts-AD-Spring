@@ -56,7 +56,9 @@ public class EstudianteServiceImpl implements EstudianteService {
     public EstudianteDTO actualizarEstudiante(Long id, EstudianteUpdateDTO dto){
         Estudiante estudianteExistente = estudianteRespository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estudiante no encontrado con id: " + id));
-        estudianteMapper.updateEntity(dto, estudianteExistente);
+
+        estudianteMapper.updateEntityFromDto(dto, estudianteExistente);
+
         Estudiante estudianteActualizado = estudianteRespository.save(estudianteExistente);
         return estudianteMapper.toDTO(estudianteActualizado);
     }
