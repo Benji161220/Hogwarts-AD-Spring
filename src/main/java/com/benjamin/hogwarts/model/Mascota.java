@@ -13,11 +13,13 @@ public class Mascota {
     @Column(name = "id_mascota")
     private Long id;
 
+    @Column(nullable = false, length = 50)
     private String nombre;
 
+    @Column(nullable = false, length = 50)
     private String especie;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_estudiante")
     @JsonBackReference
     private Estudiante estudiante;

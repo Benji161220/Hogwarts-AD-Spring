@@ -16,9 +16,10 @@ public class Casa {
     @Column(name = "id_casa")
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 50)
     private String nombre;
 
+    @Column(nullable = false, length = 50)
     private String fundador;
 
     @OneToOne
@@ -26,6 +27,7 @@ public class Casa {
     @JsonManagedReference
     private Profesor jefe;
 
+    @Column(nullable = false, length = 50)
     private String fantasma;
 
     @OneToMany(mappedBy = "casa")

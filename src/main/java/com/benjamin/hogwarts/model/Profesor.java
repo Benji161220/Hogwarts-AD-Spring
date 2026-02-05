@@ -9,22 +9,26 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "profesor")
+@Table(name = "profesor", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nombre", "apellido"})
+})
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_profesor")
     private Long id;
 
+    @Column(nullable = false, length = 50)
     private String nombre;
 
+    @Column(nullable = false, length = 50)
     private String apellido;
     @OneToOne
     @JoinColumn(name = "id_asignatura")
     @JsonManagedReference
     private Asignatura asignatura;
 
-    @Column(name = "fecha_inicio")
+    @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
 
     @OneToOne(mappedBy = "jefe")

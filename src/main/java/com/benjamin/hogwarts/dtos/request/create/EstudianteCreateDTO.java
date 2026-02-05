@@ -19,16 +19,16 @@ public class EstudianteCreateDTO {
     @Size(max = 50, message = "El apellido no puede superar los 50 caracteres")
     private String apellido;
 
-    @NotBlank(message = "El año del curso no puede estar vacío")
+    @NotNull(message = "El año del curso no puede ser nulo")
     @Min(value = 0, message = "El año del curso no puede estar por debajo de 0")
-    private Integer anyoCurso;
+    private int anyoCurso;
 
-    @NotBlank(message = "La fecha de nacimiento no puede estar vacía")
+    @NotNull(message = "La fecha de nacimiento no puede ser nula")
     private LocalDate fechaNacimiento;
 
-    @NotBlank(message = "EL id de la casa no puede estar vació")
+    @NotNull(message = "EL id de la casa no puede ser nulo")
     @Min(value = 0, message = "El id de la casa no puede ser negativo")
-    private Integer casaId;
+    private Long casaId;
 
     @Valid
     @NotNull(message = "La mascota es obligatoria")

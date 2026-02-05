@@ -1,11 +1,14 @@
 package com.benjamin.hogwarts.controller;
 
 import com.benjamin.hogwarts.dtos.request.create.EstudianteCreateDTO;
+import com.benjamin.hogwarts.dtos.request.update.EstudianteUpdateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
 import com.benjamin.hogwarts.service.EstudianteService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +39,15 @@ public class EstudianteController {
         }
         return ResponseEntity.ok(estudiante); // 200 OK
     }
-    @PostMapping("/{id}")
+    @PostMapping
     public ResponseEntity<EstudianteDTO> crearEstudiante(@Valid @RequestBody EstudianteCreateDTO dto){
-        EstudianteDTO estudianteCreado = estudianteService.crea
+        EstudianteDTO estudianteCreado = estudianteService.crearEstudiante(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(estudianteCreado); // 201 Created
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EstudianteDTO> actualizarEstudiante(@PathVariable Long id, @Valid @RequestBody EstudianteUpdateDTO dto){
+        EstudianteDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, dto);
+        return ResponseEntity.ok(estudianteActualizado); // 200 OK
     }
 }

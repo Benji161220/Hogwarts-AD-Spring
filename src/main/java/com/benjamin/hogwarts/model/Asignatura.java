@@ -17,9 +17,10 @@ public class Asignatura {
     @Column(name = "id_asignatura")
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 100)
     private String nombre;
 
+    @Column(nullable = false, length = 50)
     private String aula;
 
     private boolean obligatoria;

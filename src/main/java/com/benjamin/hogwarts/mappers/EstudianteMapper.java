@@ -1,13 +1,12 @@
 package com.benjamin.hogwarts.mappers;
 
-import com.benjamin.hogwarts.dtos.response.AsignaturaCalificacionDTO;
+import com.benjamin.hogwarts.dtos.request.create.EstudianteCreateDTO;
+import com.benjamin.hogwarts.dtos.request.update.EstudianteUpdateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 @Component
 public class EstudianteMapper {
@@ -34,5 +33,25 @@ public class EstudianteMapper {
                         .map(asignaturaCalificacionMapper::toDTO)
                         .toList());
         return dto;
+    }
+    public Estudiante toEntity(EstudianteCreateDTO dto){
+        if (dto == null){
+            return null;
+        }
+        Estudiante estudiante = new Estudiante();
+        estudiante.setNombreCompleto(dto.getNombre());
+        estudiante.setApellido(dto.getApellido());
+        estudiante.setAnyoCurso(dto.getAnyoCurso());
+        estudiante.setFechaNacimiento(dto.getFechaNacimiento());
+        estudiante.setMascota(mascotaMapper.toEntity(dto.getMascota()));
+        return estudiante;
+    }
+    public void updateEntity(EstudianteUpdateDTO dto, Estudiante estudiante){
+        if (dto == null || estudiante == null){
+            return;
+        }
+        estudiante.setAnyoCurso(dto.getAnyoCurso());
+        estudiante.setFechaNacimiento(dto.getFechaNacimiento());
+        mascotaMapper.updateEntityFromDTO(dto.getMascota(), estudiante.getMascota());
     }
 }
