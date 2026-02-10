@@ -47,7 +47,9 @@ public class EstudianteServiceImpl implements EstudianteService {
         Estudiante estudiante = estudianteMapper.toEntity(dto);
         estudiante.setCasa(casaRepository.findById(dto.getCasaId())
                 .orElseThrow(() -> new NoSuchElementException("Casa no encontrada con id: " + dto.getCasaId())));
-        estudiante.getMascota().setEstudiante(estudiante);
+        if (estudiante.getMascota() != null){
+            estudiante.getMascota().setEstudiante(estudiante);
+        }
         Estudiante estudianteGuardado = estudianteRespository.save(estudiante);
         return estudianteMapper.toDTO(estudianteGuardado);
     }

@@ -31,6 +31,5 @@ public class EstudianteCreateDTO {
     private Long casaId;
 
     @Valid
-    @NotNull(message = "La mascota es obligatoria")
     private MascotaCreateDTO mascota;
 }
