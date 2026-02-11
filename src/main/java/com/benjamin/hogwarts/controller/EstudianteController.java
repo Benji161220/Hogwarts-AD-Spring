@@ -50,4 +50,9 @@ public class EstudianteController {
         EstudianteDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, dto);
         return ResponseEntity.ok(estudianteActualizado); // 200 OK
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarEstudiante(@PathVariable Long id){
+        estudianteService.eliminarEstudiante(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
 }

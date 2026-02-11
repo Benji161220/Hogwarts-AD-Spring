@@ -64,4 +64,11 @@ public class EstudianteServiceImpl implements EstudianteService {
         Estudiante estudianteActualizado = estudianteRespository.save(estudianteExistente);
         return estudianteMapper.toDTO(estudianteActualizado);
     }
+    @Override
+    @Transactional
+    public void eliminarEstudiante(Long id){
+        Estudiante estudiante = estudianteRespository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("El estudiante con ID " + id + " no existe."));
+        estudianteRespository.delete(estudiante);
+    }
 }

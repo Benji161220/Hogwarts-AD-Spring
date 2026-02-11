@@ -39,8 +39,6 @@ public class Estudiante {
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column(nullable = false)
-    private boolean deleted = false;
 
     @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL)
     @JsonManagedReference
