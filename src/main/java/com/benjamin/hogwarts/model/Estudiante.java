@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.SoftDelete;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "estudiante", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"nombre", "apellido"})
 })
+@SoftDelete
 public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,9 @@ public class Estudiante {
 
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
+
+    @Column(nullable = false)
+    private boolean deleted = false;
 
     @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL)
     @JsonManagedReference
