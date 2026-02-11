@@ -5,6 +5,7 @@ import com.benjamin.hogwarts.mappers.MascotaMapper;
 import com.benjamin.hogwarts.model.Mascota;
 import com.benjamin.hogwarts.respository.MascotaSpring;
 import com.benjamin.hogwarts.service.MascotaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,12 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public MascotaDTO obtenerMascotaPorId(Long id) {
         return mascotaRepository.findById(id).map(mascotaMapper::toDTO).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void eliminarMascota(Long id){
+        Mascota mascota = mascotaRepository.findById(id).orElseThrow(()-> new IllegalStateException("La Mascota con ID " + id + " no existe."));
+        mascotaRepository.delete(mascota);
     }
 }

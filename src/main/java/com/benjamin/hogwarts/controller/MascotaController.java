@@ -5,10 +5,7 @@ import com.benjamin.hogwarts.model.Mascota;
 import com.benjamin.hogwarts.service.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +35,10 @@ public class MascotaController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(mascota);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarMascota(@PathVariable Long id) {
+        mascotaService.eliminarMascota(id);
+        return ResponseEntity.noContent().build(); //204 No Content
     }
 }

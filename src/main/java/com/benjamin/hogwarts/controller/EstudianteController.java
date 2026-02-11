@@ -45,6 +45,8 @@ public class EstudianteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(estudianteCreado); // 201 Created
     }
 
+
+    //Falta que cuando mandes mascota null, que se cambie la mascota a null y se elimine de la BD
     @PutMapping("/{id}")
     public ResponseEntity<EstudianteDTO> actualizarEstudiante(@PathVariable Long id, @Valid @RequestBody EstudianteUpdateDTO dto){
         EstudianteDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, dto);
