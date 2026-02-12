@@ -4,9 +4,12 @@ import com.benjamin.hogwarts.dtos.request.create.EstudianteCreateDTO;
 import com.benjamin.hogwarts.dtos.request.update.EstudianteUpdateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.mappers.EstudianteMapper;
+import com.benjamin.hogwarts.mappers.MascotaMapper;
 import com.benjamin.hogwarts.model.Estudiante;
+import com.benjamin.hogwarts.model.Mascota;
 import com.benjamin.hogwarts.respository.CasaRepository;
 import com.benjamin.hogwarts.respository.EstudianteRespository;
+import com.benjamin.hogwarts.respository.MascotaRepository;
 import com.benjamin.hogwarts.service.EstudianteService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +23,15 @@ public class EstudianteServiceImpl implements EstudianteService {
     private final EstudianteRespository estudianteRespository;
     private final EstudianteMapper estudianteMapper;
     private final CasaRepository casaRepository;
+    private final MascotaRepository mascotaRepository;
 
 
     @Autowired
-    public EstudianteServiceImpl(EstudianteRespository estudianteRespository, EstudianteMapper estudianteMapper, CasaRepository casaRepository) {
+    public EstudianteServiceImpl(EstudianteRespository estudianteRespository, EstudianteMapper estudianteMapper, CasaRepository casaRepository, MascotaRepository mascotaRepository) {
         this.estudianteRespository = estudianteRespository;
         this.estudianteMapper = estudianteMapper;
         this.casaRepository = casaRepository;
+        this.mascotaRepository = mascotaRepository;
     }
     @Override
     public List<EstudianteDTO> obtenerTodosLosEstudiantes(){
@@ -58,10 +63,10 @@ public class EstudianteServiceImpl implements EstudianteService {
     public EstudianteDTO actualizarEstudiante(Long id, EstudianteUpdateDTO dto){
         Estudiante estudianteExistente = estudianteRespository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estudiante no encontrado con id: " + id));
-
+        Mascota mascota = estudianteExistente.getMascota();
         estudianteMapper.updateEntityFromDto(dto, estudianteExistente);
-
         Estudiante estudianteActualizado = estudianteRespository.save(estudianteExistente);
+        mascotaRepository.delete(mascota);
         return estudianteMapper.toDTO(estudianteActualizado);
     }
     @Override

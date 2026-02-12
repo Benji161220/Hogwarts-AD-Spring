@@ -26,10 +26,8 @@ public class EstudianteMapper {
         dto.setAnyoCurso(estudiante.getAnyoCurso());
         dto.setFechaNacimiento(estudiante.getFechaNacimiento());
         dto.setCasa(estudiante.getCasa().getNombre());
-        if (estudiante.getMascota() != null){
-            dto.setMascota(mascotaMapper.toDTO(estudiante.getMascota()));
+        dto.setMascota(mascotaMapper.toDTO(estudiante.getMascota()));
 
-        }
         dto.setAsignaturas(
                 estudiante.getAsignaturas()
                         .stream()
@@ -59,6 +57,8 @@ public class EstudianteMapper {
         estudiante.setFechaNacimiento(dto.getFechaNacimiento());
         if (dto.getMascota() != null){
             mascotaMapper.updateEntityFromDTO(dto.getMascota(), estudiante.getMascota());
+        } else {
+            estudiante.setMascota(null);
         }
     }
 }
