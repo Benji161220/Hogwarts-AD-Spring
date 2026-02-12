@@ -13,4 +13,9 @@ public class MascotaCreateDTO {
     @NotBlank(message = "La especie no puede estar vacío")
     @Size(max = 50, message = "La especie no puede superar los 50 caracteres")
     private String especie;
+
+    public MascotaCreateDTO(String nombre, String especie) {
+        this.nombre = nombre;
+        this.especie = especie;
+    }
 }

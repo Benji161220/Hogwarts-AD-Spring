@@ -1,9 +1,11 @@
 package com.benjamin.hogwarts.mappers;
 
 import com.benjamin.hogwarts.dtos.request.create.EstudianteCreateDTO;
+import com.benjamin.hogwarts.dtos.request.create.MascotaCreateDTO;
 import com.benjamin.hogwarts.dtos.request.update.EstudianteUpdateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
+import com.benjamin.hogwarts.model.Mascota;
 import org.springframework.stereotype.Component;
 
 

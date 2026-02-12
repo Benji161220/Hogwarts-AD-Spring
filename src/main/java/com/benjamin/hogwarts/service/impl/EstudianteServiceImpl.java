@@ -66,7 +66,9 @@ public class EstudianteServiceImpl implements EstudianteService {
         Mascota mascota = estudianteExistente.getMascota();
         estudianteMapper.updateEntityFromDto(dto, estudianteExistente);
         Estudiante estudianteActualizado = estudianteRespository.save(estudianteExistente);
-        mascotaRepository.delete(mascota);
+        if (dto.getMascota() == null ){
+            mascotaRepository.delete(mascota);
+        }
         return estudianteMapper.toDTO(estudianteActualizado);
     }
     @Override
