@@ -58,7 +58,12 @@ public class EstudianteMapper {
         estudiante.setAnyoCurso(dto.getAnyoCurso());
         estudiante.setFechaNacimiento(dto.getFechaNacimiento());
         if (dto.getMascota() != null){
-            mascotaMapper.updateEntityFromDTO(dto.getMascota(), estudiante.getMascota());
+            if (estudiante.getMascota() != null){
+                mascotaMapper.updateEntityFromDTO(dto.getMascota(), estudiante.getMascota());
+
+            } else {
+                estudiante.setMascota(mascotaMapper.toEntity(dto.getMascota()));
+            }
         } else {
             estudiante.setMascota(null);
         }

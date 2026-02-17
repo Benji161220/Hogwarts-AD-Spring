@@ -35,4 +35,10 @@ public class MascotaMapper {
         mascota.setNombre(dto.getNombre());
         mascota.setEspecie(dto.getEspecie());
     }
+    public Mascota toEntity(MascotaUpdateDTO dto){
+        Mascota mascota = new Mascota();
+        mascota.setNombre(dto.getNombre());
+        mascota.setEspecie(dto.getEspecie());
+        return mascota;
+    }
 }

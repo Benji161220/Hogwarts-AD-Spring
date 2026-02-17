@@ -65,8 +65,11 @@ public class EstudianteServiceImpl implements EstudianteService {
                 .orElseThrow(() -> new NoSuchElementException("Estudiante no encontrado con id: " + id));
         Mascota mascota = estudianteExistente.getMascota();
         estudianteMapper.updateEntityFromDto(dto, estudianteExistente);
+        if (estudianteExistente.getMascota() != null){
+            estudianteExistente.getMascota().setEstudiante(estudianteExistente);
+        }
         Estudiante estudianteActualizado = estudianteRespository.save(estudianteExistente);
-        if (dto.getMascota() == null ){
+        if (dto.getMascota() == null && mascota != null) {
             mascotaRepository.delete(mascota);
         }
         return estudianteMapper.toDTO(estudianteActualizado);
