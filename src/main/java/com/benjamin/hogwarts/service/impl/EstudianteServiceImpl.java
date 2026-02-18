@@ -79,6 +79,9 @@ public class EstudianteServiceImpl implements EstudianteService {
     public void eliminarEstudiante(Long id){
         Estudiante estudiante = estudianteRespository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("El estudiante con ID " + id + " no existe."));
+        if (estudiante.getMascota() != null){
+            mascotaRepository.delete(estudiante.getMascota());
+        }
         estudianteRespository.delete(estudiante);
     }
 }

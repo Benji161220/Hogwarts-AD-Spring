@@ -3,7 +3,7 @@ package com.benjamin.hogwarts.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.SoftDelete;
@@ -12,7 +12,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"mascota", "asignaturas", "casa"})
+@EqualsAndHashCode(exclude = {"mascota", "asignaturas", "casa"})
 @Entity
 @Table(name = "estudiante", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"nombre", "apellido"})

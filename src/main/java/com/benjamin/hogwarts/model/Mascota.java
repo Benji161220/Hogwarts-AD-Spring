@@ -2,10 +2,14 @@ package com.benjamin.hogwarts.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.SoftDelete;
 
-@Data
+
+@Getter
+@Setter
+@ToString(exclude = "estudiante")
+@EqualsAndHashCode(exclude = "estudiante")
 @Entity
 @SoftDelete
 @Table(name = "mascota")
@@ -23,5 +27,6 @@ public class Mascota {
 
     @OneToOne
     @JoinColumn(name = "id_estudiante", nullable = false)
+    @JsonBackReference
     private Estudiante estudiante;
 }
