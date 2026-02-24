@@ -6,6 +6,8 @@ import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
 import com.benjamin.hogwarts.service.EstudianteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,10 @@ public class EstudianteController {
     }
     @GetMapping("/{id}")
     @Operation(summary = "Obtiene estudiante por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estudiante encontrado"),
+            @ApiResponse(responseCode = "404", description = "No existe estudiante con ese id")
+    })
     public ResponseEntity<EstudianteDTO> obtenerEstudiantePorId(@PathVariable Long id) {
         EstudianteDTO estudiante = estudianteService.obtenerEstudiantePorId(id);
         if (estudiante == null) {
@@ -44,6 +50,10 @@ public class EstudianteController {
     }
     @PostMapping
     @Operation(summary = "Crea un nuevo estudiante")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Estudiante creado correctamente"),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos")
+    })
     public ResponseEntity<EstudianteDTO> crearEstudiante(@Valid @RequestBody EstudianteCreateDTO dto){
         EstudianteDTO estudianteCreado = estudianteService.crearEstudiante(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(estudianteCreado); // 201 Created
