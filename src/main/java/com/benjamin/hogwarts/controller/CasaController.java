@@ -3,6 +3,7 @@ package com.benjamin.hogwarts.controller;
 import com.benjamin.hogwarts.dtos.response.CasaDTO;
 import com.benjamin.hogwarts.model.Casa;
 import com.benjamin.hogwarts.service.CasaService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class CasaController {
     }
 
     @GetMapping
+    @Operation(summary = "Obtiene todos las casas")
     public ResponseEntity<List<CasaDTO>> obtenerTodas() {
         List<CasaDTO> lista = casaService.obtenerTodasCasas();
         if (lista.isEmpty()) {
@@ -32,6 +34,7 @@ public class CasaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtiene casa por id")
     public ResponseEntity<CasaDTO> obtenerPorId(@PathVariable Long id) {
         CasaDTO casa = casaService.obtenerCasaPorId(id);
         if (casa == null) {

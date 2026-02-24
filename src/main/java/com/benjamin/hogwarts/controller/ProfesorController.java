@@ -3,6 +3,7 @@ package com.benjamin.hogwarts.controller;
 import com.benjamin.hogwarts.dtos.response.ProfesorDTO;
 import com.benjamin.hogwarts.model.Profesor;
 import com.benjamin.hogwarts.service.ProfesorService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class ProfesorController {
     }
 
     @GetMapping
+    @Operation(summary = "Obtiene todos los profesores")
     public ResponseEntity<List<ProfesorDTO>> obtenerTodas() {
         List<ProfesorDTO> lista = profesorService.obtenerTodosLosProfesores();
         if (lista.isEmpty()) {
@@ -32,6 +34,7 @@ public class ProfesorController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtiene profesor por id")
     public ResponseEntity<ProfesorDTO> obtenerPorId(@PathVariable Long id) {
         ProfesorDTO profesor = profesorService.obtenerProfesorPorId(id);
         if (profesor == null) {

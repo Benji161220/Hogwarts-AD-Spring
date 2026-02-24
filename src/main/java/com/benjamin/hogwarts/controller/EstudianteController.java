@@ -5,6 +5,7 @@ import com.benjamin.hogwarts.dtos.request.update.EstudianteUpdateDTO;
 import com.benjamin.hogwarts.dtos.response.EstudianteDTO;
 import com.benjamin.hogwarts.model.Estudiante;
 import com.benjamin.hogwarts.service.EstudianteService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class EstudianteController {
         this.estudianteService = estudianteService;
     }
     @GetMapping
-    public ResponseEntity<List<EstudianteDTO>> obtenerTodosLosPerfiles(){
+    @Operation(summary = "Obtiene todos los estudiantes")
+    public ResponseEntity<List<EstudianteDTO>> obtenerTodosLosEstudiantes(){
         List<EstudianteDTO> estudiantes = estudianteService.obtenerTodosLosEstudiantes();
         if (estudiantes.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content
@@ -32,7 +34,8 @@ public class EstudianteController {
         return ResponseEntity.ok(estudiantes);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<EstudianteDTO> obtenerPerfilPorId(@PathVariable Long id) {
+    @Operation(summary = "Obtiene estudiante por id")
+    public ResponseEntity<EstudianteDTO> obtenerEstudiantePorId(@PathVariable Long id) {
         EstudianteDTO estudiante = estudianteService.obtenerEstudiantePorId(id);
         if (estudiante == null) {
             return ResponseEntity.notFound().build(); // 404 Not Found
@@ -40,19 +43,20 @@ public class EstudianteController {
         return ResponseEntity.ok(estudiante); // 200 OK
     }
     @PostMapping
+    @Operation(summary = "Crea un nuevo estudiante")
     public ResponseEntity<EstudianteDTO> crearEstudiante(@Valid @RequestBody EstudianteCreateDTO dto){
         EstudianteDTO estudianteCreado = estudianteService.crearEstudiante(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(estudianteCreado); // 201 Created
     }
 
-
-    //Falta que cuando mandes mascota null, que se cambie la mascota a null y se elimine de la BD
     @PutMapping("/{id}")
+    @Operation(summary = "Modifica los datos de un estudiante")
     public ResponseEntity<EstudianteDTO> actualizarEstudiante(@PathVariable Long id, @Valid @RequestBody EstudianteUpdateDTO dto){
         EstudianteDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, dto);
         return ResponseEntity.ok(estudianteActualizado); // 200 OK
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina un estudiante por su id")
     public ResponseEntity<Void> eliminarEstudiante(@PathVariable Long id){
         estudianteService.eliminarEstudiante(id);
         return ResponseEntity.noContent().build(); // 204 No Content
