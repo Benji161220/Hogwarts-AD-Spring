@@ -1,9 +1,7 @@
 package com.benjamin.hogwarts.controller;
 
 import com.benjamin.hogwarts.dtos.response.AsignaturaDTO;
-import com.benjamin.hogwarts.model.Asignatura;
-import com.benjamin.hogwarts.model.Estudiante;
-import com.benjamin.hogwarts.respository.AsignaturaRepository;
+
 import com.benjamin.hogwarts.service.AsignaturaService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +39,7 @@ public class AsignaturaController {
         }
         return ResponseEntity.ok(asignatura); // 200 OK
     }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Elimina una asignatura por su id")
     public ResponseEntity<Void> eliminarAsignatura(@PathVariable Long id) {
