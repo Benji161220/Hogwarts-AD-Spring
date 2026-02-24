@@ -7,10 +7,7 @@ import com.benjamin.hogwarts.respository.AsignaturaRepository;
 import com.benjamin.hogwarts.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,10 @@ public class AsignaturaController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
         return ResponseEntity.ok(asignatura); // 200 OK
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarAsignatura(@PathVariable Long id) {
+        asignaturaService.eliminarAsignatura(id);
+        return ResponseEntity.noContent().build();
     }
 }

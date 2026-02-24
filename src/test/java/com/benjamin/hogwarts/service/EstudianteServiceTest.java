@@ -32,13 +32,10 @@ public class EstudianteServiceTest {
 
     private Estudiante estudianteTest;
 
-    private Mascota mascotaTest;
-
 
     @BeforeEach
     void setUp() {
         estudianteTest = new Estudiante();
-        mascotaTest = new Mascota();
         estudianteTest.setId(1L);
         estudianteTest.setNombre("Harry");
         estudianteTest.setApellido("Potter");

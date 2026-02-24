@@ -1,10 +1,7 @@
 package com.benjamin.hogwarts.dtos.request.create;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -20,6 +17,7 @@ public class EstudianteCreateDTO {
     private String apellido;
 
     @NotNull(message = "El año del curso no puede ser nulo")
+    @Max(7)
     @Min(value = 0, message = "El año del curso no puede estar por debajo de 0")
     private int anyoCurso;
 
